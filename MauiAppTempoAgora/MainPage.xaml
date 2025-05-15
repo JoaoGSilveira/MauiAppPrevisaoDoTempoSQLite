@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiAppTempoAgora.MainPage"
+             Title="Histórico de Previsões">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Frame HasShadow="True" CornerRadius="10" Padding="10">
+                <VerticalStackLayout Spacing="10">
+                    <Button Text="Minha Localização" Clicked="Button_Clicked" />
+                    <Label x:Name="lbl_coords" />
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Entry x:Name="txt_cidade" Placeholder="Digite a cidade" HorizontalOptions="FillAndExpand" />
+                        <Button Text="Buscar Previsão" Clicked="Button_Clicked_1" />
+                    </HorizontalStackLayout>
+
+                    <Label x:Name="lbl_res" FontAttributes="Italic" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame HasShadow="True" CornerRadius="10" Padding="10">
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Label Text="Pesquisar por data:" VerticalOptions="Center" />
+                    <DatePicker x:Name="datePicker" />
+                    <Button Text="Buscar" Clicked="BtnBuscarHistorico_Clicked" />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Frame HasShadow="True" CornerRadius="10" Padding="0">
+                <CollectionView x:Name="cv_historico"
+                    EmptyView="Nenhum histórico encontrado"
+                    ItemsLayout="VerticalList">
+                    <CollectionView.Header>
+                        <Grid Padding="5" BackgroundColor="#EEEEEE">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Cidade" Grid.Column="0" FontAttributes="Bold" />
+                            <Label Text="Data" Grid.Column="1" FontAttributes="Bold" />
+                            <Label Text="Temp Máx" Grid.Column="2" FontAttributes="Bold" />
+                            <Label Text="Temp Min" Grid.Column="3" FontAttributes="Bold" />
+                            <Label Text="Mapa" Grid.Column="4" FontAttributes="Bold" />
+                        </Grid>
+                    </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="5" RowSpacing="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Termo}" Grid.Column="0" />
+                                <Label Text="{Binding DataPesquisa, StringFormat='{0:yyyy-MM-dd}'}" Grid.Column="1" />
+                                <Label Text="{Binding TempMax}" Grid.Column="2" />
+                                <Label Text="{Binding TempMin}" Grid.Column="3" />
+                                <Button Text="Mapa"
+                            Grid.Column="4"
+                            Clicked="OnMapaHistoricoClicked" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
+
+            <Frame HasShadow="True" CornerRadius="10" Padding="0" VerticalOptions="FillAndExpand">
+                <WebView
+                    x:Name="wv_mapa"
+                    HeightRequest="400"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand" />
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

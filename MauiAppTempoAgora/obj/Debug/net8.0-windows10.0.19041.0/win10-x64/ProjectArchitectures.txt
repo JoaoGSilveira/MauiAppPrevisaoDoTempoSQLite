@@ -1,0 +1,1 @@
+C:\Users\joaos\OneDrive\Documentos\Visual Studio 2022\MauiAppTempoAgora\MauiAppTempoAgora\MauiAppTempoAgora.csproj;x64
